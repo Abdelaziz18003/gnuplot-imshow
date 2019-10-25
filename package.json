@@ -1,0 +1,22 @@
+{
+  "name": "gnuplot-imshow",
+  "version": "0.1.0",
+  "description": "Display an ndarray as an image using gnuplot",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abdelaziz18003/gnuplot-imshow.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Abdelaziz18003/gnuplot-imshow/issues"
+  },
+  "homepage": "https://github.com/Abdelaziz18003/gnuplot-imshow#readme",
+  "devDependencies": {
+    "get-pixels": "^3.3.2"
+  }
+}
