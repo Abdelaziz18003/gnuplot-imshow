@@ -3,6 +3,9 @@
 const { spawn } = require('child_process');
 
 module.exports = function imshow (ndarray) {
+  if (!isNdarray(ndarray) && !isValidImage(ndarray)) {
+    throw new Error('Image must be a 2D ndarray or a 3D ndarray having 3 or 4 channels')
+  }
   let data = ''
   for (let j = 0; j < ndarray.shape[0]; j++) {
     for (let i = 0; i < ndarray.shape[1]; i++) {
@@ -19,4 +22,19 @@ module.exports = function imshow (ndarray) {
   gnuplot.stdin.write(`${data}`);
   gnuplot.stdin.write(`EOF`);
   gnuplot.stdin.end();
+}
+
+function isNdarray (array) {
+  return (
+    array.hasOwnProperty('data') &&
+    array.hasOwnProperty('shape') &&
+    array.hasOwnProperty('stride') &&
+    array.hasOwnProperty('offset')
+  )
+}
+
+function isValidImage (image) {
+  return image.dimension === 2 ||
+    image.dimension === 3 && image.shape[2] === 3 ||
+    image.dimension === 3 && image.shape[2] === 4
 }
