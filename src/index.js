@@ -7,8 +7,10 @@ module.exports = function imshow (ndarray) {
     throw new Error('Image must be a 2D ndarray or a 3D ndarray having 3 or 4 channels')
   }
   let data = ''
-  for (let j = 0; j < ndarray.shape[0]; j++) {
-    for (let i = 0; i < ndarray.shape[1]; i++) {
+  for (let i = 0; i < ndarray.shape[0]; i++) {
+    // get-pixels package always returns a rotated image
+    // so we fix this below by counting in reverse
+    for (let j = ndarray.shape[1] - 1; j >= 0; j--) {
       data += `${ndarray.get(i, j, 0)} ${ndarray.get(i, j, 1)} ${ndarray.get(i, j, 2)}\n`
     }
     data += '\n\n'
