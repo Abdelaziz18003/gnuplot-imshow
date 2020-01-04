@@ -15,7 +15,7 @@ const getPixels = require('get-pixels')
 const imshow = require('gnuplot-imshow');
 
 getPixels('baboon.jpg', (err, pixels) => {
-  imshow(pixels)
+  imshow(pixels, {title: 'baboon image'})
 })
 ```
-![gnuplot-imshow-demo](https://user-images.githubusercontent.com/11301627/67698335-75587a00-f9aa-11e9-87f4-d4b4cef8e4c7.png)
+![gnuplot-imshow-demo](https://i.imgur.com/hNHi08o.png)

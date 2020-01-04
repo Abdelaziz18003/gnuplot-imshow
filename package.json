@@ -1,6 +1,6 @@
 {
   "name": "gnuplot-imshow",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Display an ndarray as an image using gnuplot",
   "main": "src/index.js",
   "scripts": {

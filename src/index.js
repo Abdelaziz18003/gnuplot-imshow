@@ -2,7 +2,7 @@
 
 const { spawn } = require('child_process');
 
-module.exports = function imshow (ndarray) {
+module.exports = function imshow (ndarray, options = {}) {
   if (!isNdarray(ndarray) && !isValidImage(ndarray)) {
     throw new Error('Image must be a 2D ndarray or a 3D ndarray having 3 or 4 channels')
   }
@@ -17,6 +17,8 @@ module.exports = function imshow (ndarray) {
   }
 
   let gnuplot = spawn('gnuplot', ['-p']);
+  if (options.title) gnuplot.stdin.write(`set term qt title '${options.title}'\n`);
+  gnuplot.stdin.write(`set size square\n`);
   gnuplot.stdin.write(`set size square\n`);
   gnuplot.stdin.write(`set autoscale xfix\n`);
   gnuplot.stdin.write(`set autoscale yfix\n`);
