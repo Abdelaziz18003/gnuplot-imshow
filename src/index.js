@@ -1,6 +1,7 @@
 "use strict"
 
 const { spawn } = require('child_process');
+const os = require('os');
 
 module.exports = function imshow (ndarray, options = {}) {
   if (!isNdarray(ndarray) && !isValidImage(ndarray)) {
@@ -17,7 +18,9 @@ module.exports = function imshow (ndarray, options = {}) {
   }
 
   let gnuplot = spawn('gnuplot', ['-p']);
-  if (options.title) gnuplot.stdin.write(`set term qt title '${options.title}'\n`);
+  if (options.title) {
+    gnuplot.stdin.write(`set term ${getTerminal()} title '${options.title}'\n`);
+  }
   gnuplot.stdin.write(`set size square\n`);
   gnuplot.stdin.write(`set size square\n`);
   gnuplot.stdin.write(`set autoscale xfix\n`);
@@ -41,4 +44,13 @@ function isValidImage (image) {
   return image.dimension === 2 ||
     image.dimension === 3 && image.shape[2] === 3 ||
     image.dimension === 3 && image.shape[2] === 4
+}
+
+function getTerminal () {
+  const currentOS = os.platform;
+  const terminals = {
+    win32: 'wxt',
+    linux: 'qt'
+  }
+  return terminals[currentOS] || 'qt'
 }
